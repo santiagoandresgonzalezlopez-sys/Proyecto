@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Asociación Formulario</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-building"></i> <span th:text="${asociacion.id} != null ? 'Editar Asociación' : 'Nueva Asociación'"></span></h3>
+                    </div>
+                    <div class="card-body">
+                        <form th:action="@{/asociacion/guardar}" th:object="${asociacion}" method="post">
+                            <input type="hidden" th:field="*{id}">
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Nombre de la Asociación:</label>
+                                <input type="text" class="form-control" th:field="*{nombre}" required placeholder="Ej: Federación Colombiana de Fútbol">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">País:</label>
+                                <input type="text" class="form-control" th:field="*{pais}" required placeholder="Ej: Colombia">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Presidente:</label>
+                                <input type="text" class="form-control" th:field="*{presidente}" required placeholder="Ej: Ramón Jesurún">
+                            </div>
+                            
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i> Guardar
+                                </button>
+                                <a th:href="@{/asociacion/listar}" class="btn btn-secondary">
+                                    <i class="fas fa-arrow-left"></i> Cancelar
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
