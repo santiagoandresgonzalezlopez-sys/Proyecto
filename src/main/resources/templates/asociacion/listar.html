@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Asociaciones</title>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h3><i class="fas fa-building"></i> Lista de Asociaciones</h3>
+                <a th:href="@{/asociacion/nuevo}" class="btn btn-light">
+                    <i class="fas fa-plus"></i> Nueva Asociación
+                </a>
+            </div>
+            <div class="card-body">
+                <div th:if="${asociaciones.isEmpty()}" class="alert alert-info text-center">
+                    <i class="fas fa-info-circle"></i> No hay asociaciones registradas.
+                </div>
+                <div th:unless="${asociaciones.isEmpty()}">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>País</th>
+                                    <th>Presidente</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="asoc : ${asociaciones}">
+                                    <td th:text="${asoc.id}">1</td>
+                                    <td th:text="${asoc.nombre}">Federación Colombiana de Fútbol</td>
+                                    <td>
+                                        <span class="badge bg-info" th:text="${asoc.pais}">Colombia</span>
+                                    </td>
+                                    <td th:text="${asoc.presidente}">Ramón Jesurún</td>
+                                    <td>
+                                        <a th:href="@{/asociacion/editar/{id}(id=${asoc.id})}" class="btn btn-warning btn-sm">
+                                            <i class="fas fa-edit"></i> Editar
+                                        </a>
+                                        <form th:action="@{/asociacion/eliminar/{id}(id=${asoc.id})}" method="post" style="display:inline"
+                                              onsubmit="return confirm('¿Eliminar esta asociación?')">
+                                            <button type="submit" class="btn btn-danger btn-sm">
+                                                <i class="fas fa-trash"></i> Eliminar
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

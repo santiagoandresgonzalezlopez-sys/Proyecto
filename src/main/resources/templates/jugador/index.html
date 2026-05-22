@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Jugador Formulario</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-users"></i> <span th:text="${jugador.id} != null ? 'Editar Jugador' : 'Nuevo Jugador'"></span></h3>
+                    </div>
+                    <div class="card-body">
+                        <form th:action="@{/jugador/guardar}" th:object="${jugador}" method="post">
+                            <input type="hidden" th:field="*{id}">
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Nombre:</label>
+                                <input type="text" class="form-control" th:field="*{nombre}" required placeholder="Ej: Lionel">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Apellido:</label>
+                                <input type="text" class="form-control" th:field="*{apellido}" required placeholder="Ej: Messi">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Número de Camiseta:</label>
+                                <input type="number" class="form-control" th:field="*{numero}" required min="1" max="99">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Posición:</label>
+                                <select class="form-select" th:field="*{posicion}" required>
+                                    <option th:value="''">Seleccione una posición...</option>
+                                    <option th:value="'Portero'">🧤 Portero</option>
+                                    <option th:value="'Defensa Central'">🛡️ Defensa Central</option>
+                                    <option th:value="'Lateral Derecho'">➡️ Lateral Derecho</option>
+                                    <option th:value="'Lateral Izquierdo'">⬅️ Lateral Izquierdo</option>
+                                    <option th:value="'Mediocampista'">⚡ Mediocampista</option>
+                                    <option th:value="'Volante Ofensivo'">🎯 Volante Ofensivo</option>
+                                    <option th:value="'Extremo Derecho'">🔀 Extremo Derecho</option>
+                                    <option th:value="'Extremo Izquierdo'">🔀 Extremo Izquierdo</option>
+                                    <option th:value="'Delantero Centro'">⚽ Delantero Centro</option>
+                                </select>
+                            </div>
+                            
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i> Guardar
+                                </button>
+                                <a th:href="@{/jugador/listar}" class="btn btn-secondary">
+                                    <i class="fas fa-arrow-left"></i> Cancelar
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

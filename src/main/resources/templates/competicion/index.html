@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Competición Formulario</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-trophy"></i> <span th:text="${competicion.id} != null ? 'Editar Competición' : 'Nueva Competición'"></span></h3>
+                    </div>
+                    <div class="card-body">
+                        <form th:action="@{/competicion/guardar}" th:object="${competicion}" method="post">
+                            <input type="hidden" th:field="*{id}">
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Nombre de la Competición:</label>
+                                <input type="text" class="form-control" th:field="*{nombre}" required placeholder="Ej: Copa Libertadores">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Monto del Premio (USD):</label>
+                                <input type="number" class="form-control" th:field="*{montoPremio}" required placeholder="Ej: 5000000">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Fecha de Inicio:</label>
+                                <input type="date" class="form-control" th:field="*{fechaInicio}" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Fecha de Fin:</label>
+                                <input type="date" class="form-control" th:field="*{fechaFin}" required>
+                            </div>
+                            
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i> Guardar
+                                </button>
+                                <a th:href="@{/competicion/listar}" class="btn btn-secondary">
+                                    <i class="fas fa-arrow-left"></i> Cancelar
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

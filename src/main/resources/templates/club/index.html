@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Club Formulario</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-shield-alt"></i> <span th:text="${club.id} != null ? 'Editar Club' : 'Nuevo Club'"></span></h3>
+                    </div>
+                    <div class="card-body">
+                        <form th:action="@{/club/guardar}" th:object="${club}" method="post">
+                            <input type="hidden" th:field="*{id}">
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Nombre del Club:</label>
+                                <input type="text" class="form-control" th:field="*{nombre}" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Ciudad:</label>
+                                <input type="text" class="form-control" th:field="*{ciudad}" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Año de Fundación:</label>
+                                <input type="number" class="form-control" th:field="*{anoFundacion}" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Entrenador:</label>
+                                <select class="form-select" th:field="*{entrenador.id}">
+                                    <option th:value="null">Seleccione un entrenador...</option>
+                                    <option th:each="ent : ${entrenadores}" th:value="${ent.id}" 
+                                            th:text="${ent.nombre + ' ' + ent.apellido}"></option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Asociación:</label>
+                                <select class="form-select" th:field="*{asociacion.id}">
+                                    <option th:value="null">Seleccione una asociación...</option>
+                                    <option th:each="asoc : ${asociaciones}" th:value="${asoc.id}" 
+                                            th:text="${asoc.nombre}"></option>
+                                </select>
+                            </div>
+							
+							<!-- JUGADORES (NUEVO) -->
+							                          <div class="mb-3">
+							                              <label class="form-label fw-bold">Jugadores:</label>
+							                              <select class="form-select" name="jugadores" multiple size="6">
+							                                  <option th:each="jug : ${jugadores}"
+							                                          th:value="${jug.id}"
+							                                          th:text="${jug.nombre + ' ' + jug.apellido + ' (#' + jug.numero + ' - ' + jug.posicion + ')'}"
+							                                          th:selected="${club.jugadores != null and club.jugadores.contains(jug)}">
+							                                  </option>
+							                              </select>
+							                              <small class="text-muted">
+							                                  <i class="fas fa-info-circle"></i> 
+							                                  Mantén presionada la tecla <strong>Ctrl</strong> (Windows) o <strong>Cmd</strong> (Mac) para seleccionar varios jugadores.
+							                              </small>
+							                          </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Competiciones:</label>
+                                <select class="form-select" name="competiciones" multiple size="5">
+                                    <option th:each="comp : ${competiciones}"
+                                            th:value="${comp.id}"
+                                            th:text="${comp.nombre}"
+                                            th:selected="${club.competiciones != null and club.competiciones.contains(comp)}"></option>
+                                </select>
+                                <small class="text-muted">Mantén Ctrl (o Cmd) para seleccionar varias.</small>
+                            </div>
+                            
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i> Guardar
+                                </button>
+                                <a th:href="@{/club/listar}" class="btn btn-secondary">
+                                    <i class="fas fa-arrow-left"></i> Cancelar
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

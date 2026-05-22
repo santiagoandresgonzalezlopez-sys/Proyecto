@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio - Sede Deportiva</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+
+    <!-- Navbar (mismo que layout.html) -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{/}">
+                <i class="fas fa-futbol"></i> Sede Deportiva
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-shield-alt"></i> Clubes
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" th:href="@{/club/nuevo}">➕ Nuevo Club</a></li>
+                            <li><a class="dropdown-item" th:href="@{/club/listar}">📋 Listar Clubes</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-chalkboard-user"></i> Entrenadores
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" th:href="@{/entrenador/nuevo}">➕ Nuevo Entrenador</a></li>
+                            <li><a class="dropdown-item" th:href="@{/entrenador/listar}">📋 Listar Entrenadores</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-users"></i> Jugadores
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" th:href="@{/jugador/nuevo}">➕ Nuevo Jugador</a></li>
+                            <li><a class="dropdown-item" th:href="@{/jugador/listar}">📋 Listar Jugadores</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-building"></i> Asociaciones
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" th:href="@{/asociacion/nuevo}">➕ Nueva Asociación</a></li>
+                            <li><a class="dropdown-item" th:href="@{/asociacion/listar}">📋 Listar Asociaciones</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-trophy"></i> Competiciones
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" th:href="@{/competicion/nuevo}">➕ Nueva Competición</a></li>
+                            <li><a class="dropdown-item" th:href="@{/competicion/listar}">📋 Listar Competiciones</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido principal de la página de inicio -->
+    <main class="py-5 fade-in">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h1 class="display-4 fw-bold">Bienvenido a la <br><span class="text-primary">Sede Deportiva</span></h1>
+                    <p class="lead mt-3">Sistema integral de gestión para clubes de fútbol, entrenadores, jugadores, asociaciones y competiciones.</p>
+                    <hr class="my-4">
+                    <p>Administra toda tu información deportiva en un solo lugar de manera fácil y rápida.</p>
+                    <div class="mt-4">
+                        <a th:href="@{/club/nuevo}" class="btn btn-primary btn-lg me-2">
+                            <i class="fas fa-plus"></i> Crear Club
+                        </a>
+                        <a th:href="@{/club/listar}" class="btn btn-outline-secondary btn-lg">
+                            <i class="fas fa-list"></i> Ver Clubes
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6 text-center">
+                    <i class="fas fa-futbol" style="font-size: 300px; color: #667eea;"></i>
+                </div>
+            </div>
+
+            <!-- Tarjetas de estadísticas -->
+            <div class="row mt-5 text-center">
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <i class="fas fa-shield-alt fa-3x text-primary"></i>
+                            <h5 class="card-title mt-3">Clubes</h5>
+                            <p class="card-text">Gestiona equipos, sus entrenadores y jugadores</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <i class="fas fa-trophy fa-3x text-warning"></i>
+                            <h5 class="card-title mt-3">Competiciones</h5>
+                            <p class="card-text">Administra torneos, ligas y copas</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <i class="fas fa-building fa-3x text-info"></i>
+                            <h5 class="card-title mt-3">Asociaciones</h5>
+                            <p class="card-text">Organiza federaciones y organismos rectores</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer text-center">
+        <div class="container">
+            <p>&copy; 2024 Sede Deportiva - Sistema de Gestión Deportiva</p>
+            <small>Todos los derechos reservados</small>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

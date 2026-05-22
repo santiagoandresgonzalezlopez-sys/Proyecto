@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Competiciones</title>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h3><i class="fas fa-trophy"></i> Lista de Competiciones</h3>
+                <a th:href="@{/competicion/nuevo}" class="btn btn-light">
+                    <i class="fas fa-plus"></i> Nueva Competición
+                </a>
+            </div>
+            <div class="card-body">
+                <div th:if="${competiciones.isEmpty()}" class="alert alert-info text-center">
+                    <i class="fas fa-info-circle"></i> No hay competiciones registradas.
+                </div>
+                <div th:unless="${competiciones.isEmpty()}">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>Premio (USD)</th>
+                                    <th>Fecha Inicio</th>
+                                    <th>Fecha Fin</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="comp : ${competiciones}">
+                                    <td th:text="${comp.id}">1</td>
+                                    <td>
+                                        <strong th:text="${comp.nombre}">Copa Libertadores</strong>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-warning text-dark">$ <span th:text="${comp.montoPremio}">5,000,000</span> USD</span>
+                                    </td>
+                                    <td th:text="${#temporals.format(comp.fechaInicio, 'dd/MM/yyyy')}">15/01/2024</td>
+                                    <td th:text="${#temporals.format(comp.fechaFin, 'dd/MM/yyyy')}">30/11/2024</td>
+                                    <td>
+                                        <a th:href="@{/competicion/editar/{id}(id=${comp.id})}" class="btn btn-warning btn-sm">
+                                            <i class="fas fa-edit"></i> Editar
+                                        </a>
+                                        <form th:action="@{/competicion/eliminar/{id}(id=${comp.id})}" method="post" style="display:inline"
+                                              onsubmit="return confirm('¿Eliminar esta competición?')">
+                                            <button type="submit" class="btn btn-danger btn-sm">
+                                                <i class="fas fa-trash"></i> Eliminar
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
